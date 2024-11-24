@@ -28,6 +28,9 @@ body {
     font-size: var(--font-size-base);
     line-height: 1.5;
     padding: var(--spacing-unit);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .game-container {
@@ -42,6 +45,32 @@ body {
     height: 95vh;
     max-width: 1200px;
     margin: 0 auto;
+    flex: 1;
+}
+
+.footer {
+    text-align: center;
+    padding: var(--spacing-unit);
+    margin-top: auto;
+}
+
+.github-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.github-link:hover {
+    color: var(--color-accent);
+}
+
+.github-icon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
 }
 
 .main-window {
