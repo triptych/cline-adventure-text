@@ -91,6 +91,22 @@ body {
     gap: 0.5rem;
 }
 
+.dir-btn[data-direction="north"] {
+    grid-area: north;
+}
+
+.dir-btn[data-direction="south"] {
+    grid-area: south;
+}
+
+.dir-btn[data-direction="west"] {
+    grid-area: west;
+}
+
+.dir-btn[data-direction="east"] {
+    grid-area: east;
+}
+
 .action-controls, .game-controls {
     display: grid;
     gap: 0.5rem;
