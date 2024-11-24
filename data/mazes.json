@@ -1,0 +1,113 @@
+{
+    "mazes": {
+        "dungeon_maze": {
+            "name": "Castle Dungeons",
+            "description": "A twisting maze of dark corridors beneath the castle. Ancient magic makes the passages shift and change.",
+            "grid_size": {
+                "width": 8,
+                "height": 8
+            },
+            "start_position": {
+                "x": 1,
+                "y": 1
+            },
+            "end_position": {
+                "x": 6,
+                "y": 6
+            },
+            "layout": [
+                ["wall", "wall", "wall", "wall", "wall", "wall", "wall", "wall"],
+                ["wall", "start", "path", "wall", "path", "path", "path", "wall"],
+                ["wall", "wall", "path", "path", "path", "wall", "path", "wall"],
+                ["wall", "path", "path", "wall", "wall", "path", "path", "wall"],
+                ["wall", "path", "wall", "path", "path", "wall", "path", "wall"],
+                ["wall", "path", "path", "wall", "path", "path", "path", "wall"],
+                ["wall", "wall", "path", "path", "path", "wall", "end", "wall"],
+                ["wall", "wall", "wall", "wall", "wall", "wall", "wall", "wall"]
+            ],
+            "items": {
+                "2,3": ["healing_potion"],
+                "4,5": ["mana_crystal"],
+                "5,2": ["old_scroll"]
+            },
+            "enemies": {
+                "3,3": "animated_armor",
+                "5,5": "shadow_knight"
+            }
+        },
+        "crypt_maze": {
+            "name": "Ancient Crypt",
+            "description": "A labyrinthine crypt filled with the remains of castle inhabitants from ages past. Strange whispers echo through the corridors.",
+            "grid_size": {
+                "width": 8,
+                "height": 8
+            },
+            "start_position": {
+                "x": 1,
+                "y": 1
+            },
+            "end_position": {
+                "x": 7,
+                "y": 7
+            },
+            "layout": [
+                ["wall", "wall", "wall", "wall", "wall", "wall", "wall", "wall"],
+                ["wall", "start", "path", "path", "wall", "path", "path", "wall"],
+                ["wall", "wall", "wall", "path", "path", "wall", "path", "wall"],
+                ["wall", "path", "path", "wall", "path", "path", "path", "wall"],
+                ["wall", "path", "wall", "path", "wall", "wall", "path", "wall"],
+                ["wall", "path", "path", "path", "path", "path", "wall", "wall"],
+                ["wall", "wall", "wall", "path", "wall", "path", "path", "wall"],
+                ["wall", "path", "path", "path", "wall", "wall", "end", "wall"],
+                ["wall", "wall", "wall", "wall", "wall", "wall", "wall", "wall"]
+            ],
+            "items": {
+                "2,4": ["spectral_armor"],
+                "4,3": ["healing_potion"],
+                "6,5": ["crown_shard"]
+            },
+            "enemies": {
+                "3,2": "phantom_noble",
+                "5,4": "book_wraith",
+                "6,6": "castle_guardian"
+            }
+        },
+        "tower_maze": {
+            "name": "Wizard's Tower",
+            "description": "A spiraling maze of magical barriers and enchanted rooms. The very walls pulse with arcane energy.",
+            "grid_size": {
+                "width": 8,
+                "height": 8
+            },
+            "start_position": {
+                "x": 1,
+                "y": 1
+            },
+            "end_position": {
+                "x": 7,
+                "y": 7
+            },
+            "layout": [
+                ["wall", "wall", "wall", "wall", "wall", "wall", "wall", "wall"],
+                ["wall", "start", "path", "wall", "path", "path", "wall", "wall"],
+                ["wall", "wall", "path", "path", "wall", "path", "path", "wall"],
+                ["wall", "path", "wall", "path", "path", "wall", "path", "wall"],
+                ["wall", "path", "path", "wall", "wall", "path", "wall", "wall"],
+                ["wall", "wall", "path", "path", "path", "path", "path", "wall"],
+                ["wall", "path", "wall", "wall", "path", "wall", "path", "wall"],
+                ["wall", "path", "path", "path", "path", "path", "end", "wall"],
+                ["wall", "wall", "wall", "wall", "wall", "wall", "wall", "wall"]
+            ],
+            "items": {
+                "3,3": ["spellbook"],
+                "5,2": ["mana_crystal"],
+                "6,4": ["crown_shard"]
+            },
+            "enemies": {
+                "2,5": "book_wraith",
+                "4,4": "shadow_knight",
+                "6,6": "castle_guardian"
+            }
+        }
+    }
+}

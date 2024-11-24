@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Adventure</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/crt.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Main game window -->
+        <div class="main-window">
+            <div class="text-display" id="textDisplay">
+                <div class="text-content"></div>
+            </div>
+        </div>
+
+        <!-- Status panel -->
+        <div class="status-panel">
+            <div class="player-stats">
+                <div class="stat health">HP: <span id="healthStat">100/100</span></div>
+                <div class="stat magic">MP: <span id="magicStat">50/50</span></div>
+                <div class="stat level">LVL: <span id="levelStat">1</span></div>
+                <div class="stat xp">XP: <span id="xpStat">0/100</span></div>
+                <div class="stat location">Location: <span id="locationStat">Starting Room</span></div>
+            </div>
+        </div>
+
+        <!-- Control panel -->
+        <div class="control-panel">
+            <div class="direction-controls">
+                <button class="dir-btn" data-direction="north">N</button>
+                <button class="dir-btn" data-direction="west">W</button>
+                <button class="dir-btn" data-direction="east">E</button>
+                <button class="dir-btn" data-direction="south">S</button>
+            </div>
+            <div class="action-controls">
+                <button class="action-btn" data-action="look">Look</button>
+                <button class="action-btn" data-action="take">Take</button>
+                <button class="action-btn" data-action="use">Use</button>
+                <button class="action-btn" data-action="talk">Talk</button>
+            </div>
+            <div class="game-controls">
+                <button class="game-btn" data-action="new">New Game</button>
+                <button class="game-btn" data-action="save">Save</button>
+                <button class="game-btn" data-action="load">Load</button>
+            </div>
+        </div>
+
+        <!-- Inventory grid -->
+        <div class="inventory-grid">
+            <div class="inventory-title">Inventory</div>
+            <div class="inventory-slots" id="inventorySlots"></div>
+        </div>
+
+        <!-- Map area -->
+        <div class="map-area">
+            <div class="map-grid" id="mapGrid"></div>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

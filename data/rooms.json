@@ -1,0 +1,129 @@
+{
+    "rooms": {
+        "start_room": {
+            "title": "Castle Entrance",
+            "description": "You stand before an ancient castle gate. The weathered stone walls loom high above you, their surfaces etched with mysterious runes that pulse with a faint green light. A cool breeze carries whispers of forgotten tales.",
+            "exits": {
+                "north": "great_hall",
+                "east": "garden",
+                "west": "guardroom"
+            },
+            "items": ["rusty_key"],
+            "enemies": [],
+            "features": [
+                {
+                    "id": "runes",
+                    "description": "Ancient runes glow with an eerie green light, forming patterns you can't quite understand.",
+                    "hidden": false
+                }
+            ]
+        },
+        "great_hall": {
+            "title": "Great Hall",
+            "description": "A vast hall stretches before you, its high ceiling supported by towering columns. Tattered banners bearing forgotten heraldry hang from the walls. Dust motes dance in beams of light filtering through stained glass windows.",
+            "exits": {
+                "north": "throne_room",
+                "south": "start_room",
+                "east": "dining_hall",
+                "west": "library"
+            },
+            "items": ["old_scroll"],
+            "enemies": ["shadow_knight"],
+            "features": [
+                {
+                    "id": "banners",
+                    "description": "The ancient banners depict scenes of battle and mystical ceremonies.",
+                    "hidden": false
+                }
+            ]
+        },
+        "garden": {
+            "title": "Overgrown Garden",
+            "description": "Nature has reclaimed this once-manicured garden. Phosphorescent flowers bloom among wild vines, casting an otherworldly glow. A broken fountain stands at the center, still trickling with strangely luminescent water.",
+            "exits": {
+                "west": "start_room",
+                "north": "dining_hall"
+            },
+            "items": ["glowing_herb"],
+            "enemies": ["garden_spirit"],
+            "features": [
+                {
+                    "id": "fountain",
+                    "description": "The fountain's water glows with an inner light, seeming to pulse in rhythm with the castle's energy.",
+                    "hidden": false
+                }
+            ]
+        },
+        "guardroom": {
+            "title": "Ancient Guardroom",
+            "description": "This chamber still bears signs of its military past. Weapon racks line the walls, though most are empty. A few rusty pieces of armor stand on displays, casting eerie shadows in the dim light.",
+            "exits": {
+                "east": "start_room",
+                "north": "library"
+            },
+            "items": ["steel_sword"],
+            "enemies": ["animated_armor"],
+            "features": [
+                {
+                    "id": "weapon_racks",
+                    "description": "Most weapons are gone, but a few ancient pieces remain, too rusted to be useful.",
+                    "hidden": false
+                }
+            ]
+        },
+        "library": {
+            "title": "Forgotten Library",
+            "description": "Towering bookshelves stretch into the shadows above. The air is thick with the scent of old parchment and magical energy. Ghostly lights float between the shelves, illuminating titles in languages long forgotten.",
+            "exits": {
+                "east": "great_hall",
+                "south": "guardroom"
+            },
+            "items": ["spellbook"],
+            "enemies": ["book_wraith"],
+            "features": [
+                {
+                    "id": "floating_lights",
+                    "description": "Orbs of soft light drift lazily through the air, seeming to respond to your presence.",
+                    "hidden": false
+                }
+            ]
+        },
+        "dining_hall": {
+            "title": "Grand Dining Hall",
+            "description": "A massive table dominates this hall, set with tarnished silver and fine china. Ethereal music seems to echo from the walls, as if the ghosts of ancient feasts linger here.",
+            "exits": {
+                "west": "great_hall",
+                "south": "garden"
+            },
+            "items": ["silver_goblet"],
+            "enemies": ["phantom_noble"],
+            "features": [
+                {
+                    "id": "eternal_feast",
+                    "description": "The table settings seem to shimmer and change when viewed from different angles.",
+                    "hidden": false
+                }
+            ]
+        },
+        "throne_room": {
+            "title": "Throne Room",
+            "description": "The castle's heart. A majestic throne sits atop a dais, pulsing with magical energy. The very air crackles with power, and the walls are covered in intricate magical circuits that glow with an inner fire.",
+            "exits": {
+                "south": "great_hall"
+            },
+            "items": ["crown_shard"],
+            "enemies": ["castle_guardian"],
+            "features": [
+                {
+                    "id": "magical_circuits",
+                    "description": "Lines of power flow through the walls, all converging on the ancient throne.",
+                    "hidden": false
+                }
+            ],
+            "requirements": {
+                "item": "royal_signet",
+                "quest": "gather_crown_shards"
+            }
+        }
+    }
+}

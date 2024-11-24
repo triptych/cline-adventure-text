@@ -1,0 +1,164 @@
+{
+    "items": {
+        "rusty_key": {
+            "name": "Rusty Key",
+            "description": "An ancient iron key, its surface corroded but still bearing traces of ornate decorations.",
+            "type": "key",
+            "usable": true,
+            "consumable": false,
+            "questItem": false,
+            "value": 10,
+            "rarity": "common",
+            "tags": ["key", "metal"]
+        },
+        "old_scroll": {
+            "name": "Mysterious Scroll",
+            "description": "A weathered scroll covered in glowing magical script. The text seems to shift and change as you watch.",
+            "type": "consumable",
+            "usable": true,
+            "consumable": true,
+            "questItem": false,
+            "value": 50,
+            "rarity": "uncommon",
+            "effects": {
+                "magic": 25
+            },
+            "tags": ["magic", "scroll", "consumable"]
+        },
+        "glowing_herb": {
+            "name": "Luminous Herb",
+            "description": "A strange plant that pulses with inner light. Its leaves feel warm to the touch.",
+            "type": "consumable",
+            "usable": true,
+            "consumable": true,
+            "questItem": false,
+            "value": 30,
+            "rarity": "uncommon",
+            "effects": {
+                "health": 20
+            },
+            "tags": ["herb", "healing", "consumable"]
+        },
+        "steel_sword": {
+            "name": "Ancient Steel Sword",
+            "description": "A well-crafted sword that has somehow survived the ages. Its edge still holds a keen sharpness.",
+            "type": "weapon",
+            "usable": false,
+            "consumable": false,
+            "questItem": false,
+            "value": 100,
+            "rarity": "uncommon",
+            "durability": 100,
+            "stats": {
+                "attack": 15,
+                "accuracy": 5
+            },
+            "tags": ["weapon", "sword", "metal"]
+        },
+        "spellbook": {
+            "name": "Tome of Forgotten Magic",
+            "description": "A heavy book bound in mysterious material. Its pages contain arcane knowledge.",
+            "type": "weapon",
+            "usable": true,
+            "consumable": false,
+            "questItem": false,
+            "value": 200,
+            "rarity": "rare",
+            "stats": {
+                "magicPower": 20,
+                "wisdom": 10
+            },
+            "requirements": {
+                "level": 3
+            },
+            "tags": ["magic", "book", "weapon"]
+        },
+        "silver_goblet": {
+            "name": "Enchanted Silver Goblet",
+            "description": "A finely crafted silver goblet that seems to enhance any liquid placed within it.",
+            "type": "consumable",
+            "usable": true,
+            "consumable": false,
+            "questItem": true,
+            "value": 150,
+            "rarity": "rare",
+            "effects": {
+                "health": 30,
+                "magic": 30
+            },
+            "tags": ["artifact", "container", "silver"]
+        },
+        "crown_shard": {
+            "name": "Shard of the Ancient Crown",
+            "description": "A fragment of what must have been a magnificent crown. It pulses with magical energy.",
+            "type": "quest",
+            "usable": false,
+            "consumable": false,
+            "questItem": true,
+            "value": 500,
+            "rarity": "legendary",
+            "tags": ["artifact", "crown", "quest"]
+        },
+        "royal_signet": {
+            "name": "Royal Signet Ring",
+            "description": "A ring bearing the royal crest. It radiates authority and magical power.",
+            "type": "accessory",
+            "usable": false,
+            "consumable": false,
+            "questItem": true,
+            "value": 1000,
+            "rarity": "legendary",
+            "stats": {
+                "magicPower": 10,
+                "charisma": 15
+            },
+            "tags": ["artifact", "ring", "royal"]
+        },
+        "healing_potion": {
+            "name": "Healing Potion",
+            "description": "A crystal vial containing a swirling red liquid that glows softly.",
+            "type": "consumable",
+            "usable": true,
+            "consumable": true,
+            "questItem": false,
+            "value": 50,
+            "rarity": "common",
+            "effects": {
+                "health": 50
+            },
+            "tags": ["potion", "healing", "consumable"]
+        },
+        "mana_crystal": {
+            "name": "Mana Crystal",
+            "description": "A crystalline formation that resonates with magical energy.",
+            "type": "consumable",
+            "usable": true,
+            "consumable": true,
+            "questItem": false,
+            "value": 75,
+            "rarity": "uncommon",
+            "effects": {
+                "magic": 40
+            },
+            "tags": ["crystal", "magic", "consumable"]
+        },
+        "spectral_armor": {
+            "name": "Spectral Armor",
+            "description": "A suit of armor that seems partially transparent. It offers surprising protection.",
+            "type": "armor",
+            "usable": false,
+            "consumable": false,
+            "questItem": false,
+            "value": 300,
+            "rarity": "rare",
+            "stats": {
+                "defense": 25,
+                "magicResist": 15
+            },
+            "requirements": {
+                "level": 5
+            },
+            "tags": ["armor", "spectral", "protective"]
+        }
+    }
+}

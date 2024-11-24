@@ -1,0 +1,168 @@
+{
+    "quests": {
+        "explore_castle": {
+            "title": "Castle Explorer",
+            "description": "Explore the mysterious castle and uncover its secrets. Map out the main areas to establish a base of operations.",
+            "objectives": [
+                {
+                    "type": "visit",
+                    "target": "great_hall",
+                    "quantity": 1
+                },
+                {
+                    "type": "visit",
+                    "target": "library",
+                    "quantity": 1
+                },
+                {
+                    "type": "visit",
+                    "target": "dining_hall",
+                    "quantity": 1
+                }
+            ],
+            "rewards": {
+                "items": ["healing_potion", "mana_crystal"],
+                "experience": 100
+            },
+            "optional": false,
+            "hidden": false
+        },
+        "gather_crown_shards": {
+            "title": "The Shattered Crown",
+            "description": "The ancient crown of power has been broken into pieces. Gather the shards to restore its power and unlock the castle's secrets.",
+            "objectives": [
+                {
+                    "type": "collect",
+                    "target": "crown_shard",
+                    "quantity": 3
+                }
+            ],
+            "rewards": {
+                "items": ["royal_signet"],
+                "experience": 300
+            },
+            "prerequisites": ["explore_castle"],
+            "optional": false,
+            "hidden": false
+        },
+        "defeat_guardians": {
+            "title": "Trial of Combat",
+            "description": "Prove your worth by defeating the powerful guardians that protect the castle's secrets.",
+            "objectives": [
+                {
+                    "type": "defeat",
+                    "target": "shadow_knight",
+                    "quantity": 1
+                },
+                {
+                    "type": "defeat",
+                    "target": "book_wraith",
+                    "quantity": 1
+                },
+                {
+                    "type": "defeat",
+                    "target": "castle_guardian",
+                    "quantity": 1
+                }
+            ],
+            "rewards": {
+                "items": ["spectral_armor"],
+                "experience": 500
+            },
+            "prerequisites": ["explore_castle"],
+            "optional": false,
+            "hidden": true
+        },
+        "magical_artifacts": {
+            "title": "Collector of Power",
+            "description": "Gather the magical artifacts scattered throughout the castle to harness their ancient power.",
+            "objectives": [
+                {
+                    "type": "collect",
+                    "target": "spellbook",
+                    "quantity": 1
+                },
+                {
+                    "type": "collect",
+                    "target": "silver_goblet",
+                    "quantity": 1
+                }
+            ],
+            "rewards": {
+                "items": ["mana_crystal"],
+                "experience": 200
+            },
+            "optional": true,
+            "hidden": false
+        },
+        "garden_restoration": {
+            "title": "Nature's Return",
+            "description": "Help restore the castle's magical garden by collecting rare herbs and defeating the corrupted garden spirit.",
+            "objectives": [
+                {
+                    "type": "collect",
+                    "target": "glowing_herb",
+                    "quantity": 3
+                },
+                {
+                    "type": "defeat",
+                    "target": "garden_spirit",
+                    "quantity": 1
+                }
+            ],
+            "rewards": {
+                "items": ["healing_potion"],
+                "experience": 150
+            },
+            "optional": true,
+            "hidden": false,
+            "stages": [
+                {
+                    "description": "The garden seems to be corrupted by dark magic. Collecting the glowing herbs might help purify it.",
+                    "objectives": [
+                        {
+                            "type": "collect",
+                            "target": "glowing_herb",
+                            "quantity": 3
+                        }
+                    ]
+                },
+                {
+                    "description": "With the herbs collected, you must now confront the corrupted garden spirit to complete the purification.",
+                    "objectives": [
+                        {
+                            "type": "defeat",
+                            "target": "garden_spirit",
+                            "quantity": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        "library_secrets": {
+            "title": "Forbidden Knowledge",
+            "description": "Discover the secrets hidden within the castle's ancient library while avoiding its dangerous guardian.",
+            "objectives": [
+                {
+                    "type": "collect",
+                    "target": "old_scroll",
+                    "quantity": 3
+                }
+            ],
+            "rewards": {
+                "items": ["spellbook"],
+                "experience": 250
+            },
+            "optional": true,
+            "hidden": true,
+            "timeLimit": 1800000,
+            "failureConditions": [
+                {
+                    "type": "timeLimit",
+                    "value": 1800000,
+                    "reason": "The magical wards have reset, sealing away the library's secrets."
+                }
+            ]
+        }
+    }
+}
