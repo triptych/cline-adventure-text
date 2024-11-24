@@ -4,12 +4,15 @@ export class Room {
         this.title = data.title;
         this.description = data.description;
         this.exits = { ...data.exits } || {};
-        this.items = [...(data.items || [])];
-        this.enemies = [...(data.enemies || [])];
+        this.initialItems = [...(data.items || [])];  // Store initial items
+        this.initialEnemies = [...(data.enemies || [])];  // Store initial enemies
+        this.items = [...this.initialItems];  // Set current items from initial items
+        this.enemies = [...this.initialEnemies];  // Set current enemies from initial enemies
         this.requirements = data.requirements || null;
         this.isExplored = false;
         this.features = data.features || [];
-        this.state = { ...data.initialState } || {};
+        this.initialState = { ...data.initialState } || {};  // Store initial state
+        this.state = { ...this.initialState };  // Set current state from initial state
         this.events = data.events || {};
         this.visited = false;
     }
@@ -199,9 +202,9 @@ export class Room {
      * Reset room to initial state
      */
     reset() {
-        this.items = [...(this.initialItems || [])];
-        this.enemies = [...(this.initialEnemies || [])];
-        this.state = { ...this.initialState } || {};
+        this.items = [...this.initialItems];  // Reset items to initial state
+        this.enemies = [...this.initialEnemies];  // Reset enemies to initial state
+        this.state = { ...this.initialState };  // Reset state to initial state
         this.isExplored = false;
         this.visited = false;
 

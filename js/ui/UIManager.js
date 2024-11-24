@@ -31,7 +31,7 @@ export class UIManager {
     setupEventListeners() {
         // Game events
         this.eventManager.on('message', (text) => this.displayMessage(text));
-        this.eventManager.on('roomEntered', (room) => this.updateRoom(room));
+        this.eventManager.on('roomEntered', (roomData) => this.updateRoom(roomData));
         this.eventManager.on('statsUpdated', (stats) => this.updateStats(stats));
         this.eventManager.on('inventoryUpdated', (inventory) => this.updateInventory(inventory));
         this.eventManager.on('mapUpdated', (mapData) => this.updateMap(mapData));
@@ -66,7 +66,9 @@ export class UIManager {
         }
     }
 
-    updateRoom(room) {
+    updateRoom(roomData) {
+        const { room, itemNames } = roomData;
+
         // Update location display
         document.getElementById('locationStat').textContent = room.title;
 
@@ -74,7 +76,26 @@ export class UIManager {
         this.displayMessage(`\n${room.title}`);
         this.displayMessage(room.description);
 
-        // Update available exits
+        // Display available exits
+        const availableExits = room.getAvailableExits();
+        if (availableExits.length > 0) {
+            this.displayMessage('\nAvailable exits:');
+            availableExits.forEach(exit => {
+                this.displayMessage(`- ${exit}`);
+            });
+        } else {
+            this.displayMessage('\nThere are no visible exits.');
+        }
+
+        // Display items that can be picked up
+        if (itemNames && itemNames.length > 0) {
+            this.displayMessage('\nItems in the room:');
+            itemNames.forEach(item => {
+                this.displayMessage(`- ${item.name}`);
+            });
+        }
+
+        // Update available exits for UI buttons
         this.updateExits(room.exits);
     }
 

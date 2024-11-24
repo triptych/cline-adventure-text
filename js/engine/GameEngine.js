@@ -28,12 +28,16 @@ export class GameEngine {
                 this.fetchWithFallback('data/mazes.json')
             ]);
 
+            console.log('Loaded items data:', itemsData); // Debug log
+
             // Initialize game objects
             this.initializeRooms(roomsData.rooms);
             this.initializeItems(itemsData.items);
             this.initializeEnemies(enemiesData.enemies);
             this.initializeQuests(questsData.quests);
             this.initializeMazes(mazesData.mazes);
+
+            console.log('Items Map after initialization:', Array.from(this.items.entries())); // Debug log
 
             this.eventManager.emit('dataLoaded');
         } catch (error) {
@@ -83,6 +87,8 @@ export class GameEngine {
     }
 
     initializeItems(itemsData) {
+        console.log('Initializing items with data:', itemsData); // Debug log
+
         if (!itemsData || Object.keys(itemsData).length === 0) {
             // Provide a default item if no data
             itemsData = {
@@ -98,8 +104,11 @@ export class GameEngine {
         }
 
         for (const [id, data] of Object.entries(itemsData)) {
+            console.log(`Creating item with id: ${id}, data:`, data); // Debug log
             this.items.set(id, new Item(id, data));
         }
+
+        console.log('Items Map after creation:', Array.from(this.items.entries())); // Debug log
     }
 
     initializeEnemies(enemiesData) {
@@ -183,6 +192,7 @@ export class GameEngine {
             this.currentRoom = startRoom;
             // Mark starting room as explored
             this.currentRoom.explore();
+            console.log('Starting room items:', this.currentRoom.items); // Debug log
         } else {
             console.error('No start room found!');
             return;
@@ -193,7 +203,7 @@ export class GameEngine {
 
         // Trigger initial game events
         this.eventManager.emit('gameStarted');
-        this.eventManager.emit('roomEntered', this.currentRoom);
+        this.emitRoomEntered();
         this.eventManager.emit('statsUpdated', this.player.getStats());
         this.updateExploredRooms(this.currentRoom.id);
     }
@@ -248,8 +258,33 @@ export class GameEngine {
         this.currentRoom = nextRoom;
         // Mark the room as explored when entering
         this.currentRoom.explore();
-        this.eventManager.emit('roomEntered', this.currentRoom);
+        this.emitRoomEntered();
         this.updateExploredRooms(nextRoomId);
+    }
+
+    emitRoomEntered() {
+        console.log('Current room items before mapping:', this.currentRoom.items); // Debug log
+        console.log('Items Map contents:', Array.from(this.items.entries())); // Debug log
+
+        // Get item names for items in the room
+        const itemNames = this.currentRoom.items
+            .map(itemId => {
+                const item = this.items.get(itemId);
+                console.log(`Looking up item with id: ${itemId}, found:`, item); // Debug log
+                return item ? { id: itemId, name: item.name } : null;
+            })
+            .filter(item => item !== null); // Filter out any null items
+
+        console.log('Resolved item names:', itemNames); // Debug log
+
+        // Create room data with item names
+        const roomData = {
+            room: this.currentRoom,
+            itemNames: itemNames
+        };
+
+        // Emit room entered event
+        this.eventManager.emit('roomEntered', roomData);
     }
 
     checkRoomRequirements(requirements) {
@@ -287,8 +322,24 @@ export class GameEngine {
 
     lookAround() {
         const description = this.currentRoom.getDescription();
-        const items = this.currentRoom.items.map(id => this.items.get(id).name).join(', ');
-        const enemies = this.currentRoom.enemies.map(id => this.enemies.get(id).name).join(', ');
+        console.log('Looking around room with items:', this.currentRoom.items); // Debug log
+
+        const items = this.currentRoom.items
+            .map(id => {
+                const item = this.items.get(id);
+                console.log(`Looking up item with id: ${id}, found:`, item); // Debug log
+                return item ? item.name : null;
+            })
+            .filter(name => name !== null)
+            .join(', ');
+
+        const enemies = this.currentRoom.enemies
+            .map(id => {
+                const enemy = this.enemies.get(id);
+                return enemy ? enemy.name : null;
+            })
+            .filter(name => name !== null)
+            .join(', ');
 
         let message = description;
         if (items) message += `\nYou see: ${items}`;
@@ -307,11 +358,18 @@ export class GameEngine {
         const itemId = this.currentRoom.items[0];
         const item = this.items.get(itemId);
 
+        if (!item) {
+            console.error(`Item ${itemId} not found in items map`);
+            return;
+        }
+
         this.player.addItem(itemId);
         this.currentRoom.removeItem(itemId);
 
         this.eventManager.emit('message', `You took the ${item.name}.`);
         this.eventManager.emit('inventoryUpdated', this.player.inventory);
+        // Re-emit room entered to update item list
+        this.emitRoomEntered();
     }
 
     useItem() {
@@ -323,6 +381,11 @@ export class GameEngine {
         // For simplicity, use the first item in inventory
         const itemId = this.player.inventory[0];
         const item = this.items.get(itemId);
+
+        if (!item) {
+            console.error(`Item ${itemId} not found in items map`);
+            return;
+        }
 
         if (!item.usable) {
             this.eventManager.emit('message', `You can't use the ${item.name}.`);
@@ -392,7 +455,7 @@ export class GameEngine {
 
         // Update UI
         this.eventManager.emit('gameLoaded');
-        this.eventManager.emit('roomEntered', this.currentRoom);
+        this.emitRoomEntered();
         this.eventManager.emit('statsUpdated', this.player.getStats());
         this.eventManager.emit('inventoryUpdated', this.player.inventory);
         this.updateExploredRooms(this.currentRoom.id);
