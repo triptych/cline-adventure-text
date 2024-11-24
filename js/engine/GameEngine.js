@@ -181,6 +181,8 @@ export class GameEngine {
         const startRoom = this.rooms.get('start_room');
         if (startRoom) {
             this.currentRoom = startRoom;
+            // Mark starting room as explored
+            this.currentRoom.explore();
         } else {
             console.error('No start room found!');
             return;
@@ -193,6 +195,7 @@ export class GameEngine {
         this.eventManager.emit('gameStarted');
         this.eventManager.emit('roomEntered', this.currentRoom);
         this.eventManager.emit('statsUpdated', this.player.getStats());
+        this.updateExploredRooms(this.currentRoom.id);
     }
 
     resetGameState() {
@@ -243,6 +246,8 @@ export class GameEngine {
         }
 
         this.currentRoom = nextRoom;
+        // Mark the room as explored when entering
+        this.currentRoom.explore();
         this.eventManager.emit('roomEntered', this.currentRoom);
         this.updateExploredRooms(nextRoomId);
     }
@@ -340,7 +345,7 @@ export class GameEngine {
     }
 
     updateExploredRooms(roomId) {
-        // Update map
+        // Update map with all explored rooms
         this.eventManager.emit('mapUpdated', {
             currentRoom: roomId,
             exploredRooms: Array.from(this.rooms.keys())

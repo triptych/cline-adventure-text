@@ -47,7 +47,18 @@ export class UIManager {
         messageElement.textContent = text;
 
         this.textDisplay.appendChild(messageElement);
-        this.textDisplay.scrollTop = this.textDisplay.scrollHeight;
+
+        // Use requestAnimationFrame to ensure DOM updates before scrolling
+        requestAnimationFrame(() => {
+            messageElement.addEventListener('animationend', () => {
+                requestAnimationFrame(() => {
+                    this.textDisplay.scrollTop = this.textDisplay.scrollHeight;
+                });
+            }, { once: true });
+
+            // Also scroll immediately
+            this.textDisplay.scrollTop = this.textDisplay.scrollHeight;
+        });
 
         // Limit the number of messages shown
         while (this.textDisplay.children.length > 100) {
