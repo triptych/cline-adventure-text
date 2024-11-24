@@ -144,9 +144,18 @@ export class UIManager {
     }
 
     getRoomMapIndex(roomId) {
-        // Convert room ID to map grid index
-        // This should be implemented based on your room layout system
-        return parseInt(roomId.replace('room_', '')) || 0;
+        // Map room IDs to grid positions
+        const roomMap = {
+            'throne_room': 27,      // Top center (8x8 grid, row 3, col 3)
+            'great_hall': 35,       // Middle center
+            'dining_hall': 36,      // Middle right
+            'library': 34,          // Middle left
+            'garden': 44,           // Bottom right
+            'start_room': 43,       // Bottom center
+            'guardroom': 42         // Bottom left
+        };
+
+        return roomMap[roomId] || 0;
     }
 
     showCombatUI() {
