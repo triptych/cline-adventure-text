@@ -10,6 +10,9 @@ class Game {
         this.ui = new UIManager(this.eventManager);
         this.saveManager = new SaveManager(this.engine, this.eventManager);
 
+        // Make items data globally available for UI
+        window.gameItems = { items: {} };
+
         this.initialize();
     }
 
@@ -19,6 +22,9 @@ class Game {
 
         // Load game data
         this.engine.loadGameData().then(() => {
+            // Make items available globally for UI
+            window.gameItems.items = Object.fromEntries(this.engine.items);
+
             // Start new game
             this.engine.startNewGame();
 

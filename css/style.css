@@ -161,6 +161,40 @@ button:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 1.5rem; /* Larger size for emojis */
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.inventory-slot.has-item {
+    background: rgba(51, 255, 51, 0.1);
+}
+
+.inventory-slot.has-item:hover {
+    background: rgba(51, 255, 51, 0.2);
+    transform: scale(1.05);
+}
+
+/* Tooltip styling */
+.inventory-slot[title] {
+    position: relative;
+}
+
+.inventory-slot[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem;
+    background: var(--color-background);
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    font-size: 0.8rem;
+    white-space: nowrap;
+    z-index: 1000;
+    pointer-events: none;
 }
 
 .map-area {

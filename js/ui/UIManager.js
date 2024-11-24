@@ -5,6 +5,22 @@ export class UIManager {
         this.inventorySlots = document.getElementById('inventorySlots');
         this.mapGrid = document.getElementById('mapGrid');
 
+        // Item type to emoji mapping
+        this.itemEmojis = {
+            key: '🔑',
+            consumable: '🧪',
+            weapon: '⚔️',
+            armor: '🛡️',
+            quest: '⭐',
+            accessory: '💍',
+            scroll: '📜',
+            book: '📚',
+            herb: '🌿',
+            potion: '🧪',
+            crystal: '💎',
+            artifact: '🏺'
+        };
+
         // Initialize UI elements
         this.initializeUI();
 
@@ -133,19 +149,47 @@ export class UIManager {
         if (magicBar) magicBar.style.width = `${magicPercent}%`;
     }
 
+    getItemEmoji(itemId) {
+        // Get item data from the game's item database
+        const itemData = window.gameItems?.items[itemId];
+        if (!itemData) return '❓';
+
+        // Check item tags first for more specific emoji
+        if (itemData.tags) {
+            for (const tag of itemData.tags) {
+                if (this.itemEmojis[tag]) {
+                    return this.itemEmojis[tag];
+                }
+            }
+        }
+
+        // Fallback to type-based emoji
+        return this.itemEmojis[itemData.type] || '❓';
+    }
+
     updateInventory(inventory) {
         // Clear all slots
         const slots = this.inventorySlots.children;
         Array.from(slots).forEach(slot => {
             slot.textContent = '';
             slot.className = 'inventory-slot';
+            slot.removeAttribute('title');
         });
 
         // Fill slots with items
         inventory.forEach((itemId, index) => {
             if (index < slots.length) {
                 const slot = slots[index];
-                slot.textContent = itemId; // Replace with item icon/name
+                const itemData = window.gameItems?.items[itemId];
+
+                // Set the emoji
+                slot.textContent = this.getItemEmoji(itemId);
+
+                // Set the tooltip with item name
+                if (itemData) {
+                    slot.title = itemData.name;
+                }
+
                 slot.className = 'inventory-slot has-item';
             }
         });
