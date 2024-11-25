@@ -16,12 +16,25 @@ class Game {
         this.initialize();
     }
 
-    initialize() {
+    async initialize() {
+        // Show boot sequence first
+        await this.ui.showBootSequence();
+
+        // Wait for any key press to start the game
+        const startGame = () => {
+            document.removeEventListener('keypress', startGame);
+            this.startGame();
+        };
+        document.addEventListener('keypress', startGame);
+    }
+
+    async startGame() {
         // Initialize event listeners
         this.setupEventListeners();
 
         // Load game data
-        this.engine.loadGameData().then(() => {
+        try {
+            await this.engine.loadGameData();
             // Make items available globally for UI
             window.gameItems.items = Object.fromEntries(this.engine.items);
 
@@ -30,10 +43,10 @@ class Game {
 
             // Initial UI update
             this.ui.refreshDisplay();
-        }).catch(error => {
+        } catch (error) {
             console.error('Failed to load game data:', error);
             this.ui.displayError('Failed to load game data. Please refresh the page.');
-        });
+        }
     }
 
     setupEventListeners() {

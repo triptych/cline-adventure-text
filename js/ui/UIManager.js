@@ -28,6 +28,67 @@ export class UIManager {
         this.setupEventListeners();
     }
 
+    async showBootSequence() {
+        this.textDisplay.innerHTML = '';
+        const bootArt = `
+╔══════════════════════════════════════════════════════════════╗
+║                    TEXT ADVENTURE OS v1.0                     ║
+╚══════════════════════════════════════════════════════════════╝
+
+`;
+        const bootMessages = [
+            "BIOS Version 1.0.14",
+            "CPU: TEXT-86 @ 4.77 MHz",
+            "Memory Test: 640K OK",
+            "INITIALIZING SYSTEM...",
+            "LOADING CORE MODULES...",
+            "CHECKING MEMORY BANKS...",
+            "INITIALIZING TEXT ENGINE...",
+            "LOADING GAME DATA...",
+            "CALIBRATING ADVENTURE PARAMETERS...",
+            "SYSTEM READY"
+        ];
+
+        // Display boot art
+        await this.typeText(bootArt, 1, false);
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        // Display boot messages with dots animation
+        for (const message of bootMessages) {
+            await this.typeText(message, 50, true);
+            if (message !== "SYSTEM READY") {
+                await this.animateDots();
+                await this.typeText(" [OK]\n", 50, true);
+                await new Promise(resolve => setTimeout(resolve, 200));
+            }
+        }
+
+        // Final boot message
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        await this.typeText("\nWELCOME TO TEXT ADVENTURE OS\n", 50, true);
+        await new Promise(resolve => setTimeout(resolve, 500));
+        await this.typeText("PRESS ANY KEY TO BEGIN YOUR ADVENTURE...\n\n", 50, true);
+    }
+
+    async typeText(text, speed, withBootEffect = false) {
+        for (const char of text) {
+            const span = document.createElement('span');
+            if (withBootEffect) {
+                span.className = 'boot-text';
+            }
+            span.textContent = char;
+            this.textDisplay.appendChild(span);
+            this.textDisplay.scrollTop = this.textDisplay.scrollHeight;
+            await new Promise(resolve => setTimeout(resolve, speed));
+        }
+    }
+
+    async animateDots() {
+        for (let i = 0; i < 3; i++) {
+            await this.typeText(".", 300, true);
+        }
+    }
+
     initializeUI() {
         // Create map grid cells
         for (let i = 0; i < 64; i++) { // 8x8 grid
